@@ -134,22 +134,22 @@ app_license = "mit"
 
 doc_events = {
     "User": {
-        "after_insert": "override-gameplan.sync-hooks.user_profile.create_user_profile",
-        "on_update": "override-gameplan.sync-hooks.user_profile.on_user_update",
+        "after_insert": "override_gameplan.override_gameplan.sync_hooks.user_profile.create_user_profile",
+        "on_update": "override_gameplan.override_gameplan.sync_hooks.user_profile.on_user_update",
     },
     "ToDo": {
-        "after_insert": "override-gameplan.sync-hooks.todo.handle_assignment.handle_assignment",
-        "on_update": "override-gameplan.sync-hooks.todo.handle_assignment.handle_assignment_removal",
+        "after_insert": "override_gameplan.override_gameplan.sync_hooks.todo.handle_assignment.handle_assignment",
+        "on_update": "override_gameplan.override_gameplan.sync_hooks.todo.handle_assignment.handle_assignment_removal",
     },
     "Customer": {
-        "after_insert": "override-gameplan.sync-hooks.team.create_team",
-        "on_update": "override-gameplan.sync-hooks.team.on_customer_update",
-        "on_trash": "override-gameplan.sync-hooks.team.on_customer_trash",
+        "after_insert": "override_gameplan.override_gameplan.sync_hooks.team.create_team",
+        "on_update": "override_gameplan.override_gameplan.sync_hooks.team.on_customer_update",
+        "on_trash": "override_gameplan.override_gameplan.sync_hooks.team.on_customer_trash",
     },
     "Project": {
-        "after_insert": "override-gameplan.sync-hooks.project.create_project",
-        "on_update": "override-gameplan.sync-hooks.project.on_project_update",
-        "on_trash": "override-gameplan.sync-hooks.project.on_project_trash",
+        "after_insert": "override_gameplan.override_gameplan.sync_hooks.project.create_project",
+        "on_update": "override_gameplan.override_gameplan.sync_hooks.project.on_project_update",
+        "on_trash": "override_gameplan.override_gameplan.sync_hooks.project.on_project_trash",
     },
 }
 
