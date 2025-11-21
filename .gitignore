@@ -53,3 +53,8 @@ jspm_packages/
 
 # Aider AI Chat
 .aider*
+
+
+# Override files
+**/frontend/src/**
+**/public/frontend/
