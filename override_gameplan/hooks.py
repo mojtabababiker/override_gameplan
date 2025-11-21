@@ -132,13 +132,26 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+    "User": {
+        "after_insert": "override-gameplan.sync-hooks.user_profile.create_user_profile",
+        "on_update": "override-gameplan.sync-hooks.user_profile.on_user_update",
+    },
+    "ToDo": {
+        "after_insert": "override-gameplan.sync-hooks.todo.handle_assignment.handle_assignment",
+        "on_update": "override-gameplan.sync-hooks.todo.handle_assignment.handle_assignment_removal",
+    },
+    "Customer": {
+        "after_insert": "override-gameplan.sync-hooks.team.create_team",
+        "on_update": "override-gameplan.sync-hooks.team.on_customer_update",
+        "on_trash": "override-gameplan.sync-hooks.team.on_customer_trash",
+    },
+    "Project": {
+        "after_insert": "override-gameplan.sync-hooks.project.create_project",
+        "on_update": "override-gameplan.sync-hooks.project.on_project_update",
+        "on_trash": "override-gameplan.sync-hooks.project.on_project_trash",
+    },
+}
 
 # Scheduled Tasks
 # ---------------
@@ -244,4 +257,3 @@ app_license = "mit"
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
-
