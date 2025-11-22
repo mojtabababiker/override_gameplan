@@ -8,7 +8,10 @@ app_license = "mit"
 # Apps
 # ------------------
 
-# required_apps = []
+required_apps = [
+    "erpnext",
+    "gameplan",
+]
 
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
@@ -86,13 +89,13 @@ app_license = "mit"
 # ------------
 
 # before_install = "override_gameplan.install.before_install"
-# after_install = "override_gameplan.install.after_install"
+after_install = "override_gameplan.install.after_install"
 
 # Uninstallation
 # ------------
 
 # before_uninstall = "override_gameplan.uninstall.before_uninstall"
-# after_uninstall = "override_gameplan.uninstall.after_uninstall"
+after_uninstall = "override_gameplan.uninstall.after_uninstall"
 
 # Integration Setup
 # ------------------
@@ -252,7 +255,7 @@ doc_events = {
 # ]
 
 # Automatically update python controller files with type annotations for this app.
-# export_python_type_annotations = True
+export_python_type_annotations = True
 
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
