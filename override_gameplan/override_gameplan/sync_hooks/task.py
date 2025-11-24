@@ -34,7 +34,7 @@ def create_gp_task_from_project_task(doc, method=None):
     - Doc Status is Completed -> Is Completed
     """
     # check to see if the last updated on is GP, if so, skip the update to avoid circular updates
-    if hasattr(doc, "last_updated_on") and doc.last_updated_on == "GP":
+    if hasattr(doc, "last_updated_by") and doc.last_updated_by == "GP":
         return
     # getting the basic fields from the Project Task
     gp_task = frappe.new_doc(
@@ -68,7 +68,7 @@ def create_gp_task_from_project_task(doc, method=None):
 
 def update_gp_task_from_project_task(doc, method=None):
     # check to see if the last updated on is GP, if so, skip the update to avoid circular updates
-    if hasattr(doc, "last_updated_on") and doc.last_updated_on == "GP":
+    if hasattr(doc, "last_updated_by") and doc.last_updated_by == "GP":
         return
     if not frappe.db.exists("GP Task", {"title": doc.subject}):
         return create_gp_task_from_project_task(doc, method)
