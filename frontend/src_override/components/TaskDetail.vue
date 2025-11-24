@@ -182,6 +182,7 @@ import { activeUsers } from '@/data/users'
 import { useGroupedSpaceOptions } from '@/data/groupedSpaces'
 import { useTask } from '@/data/tasks'
 import { GPTask } from '@/types/doctypes'
+import { updateProjectTask } from '../data/tasks'
 
 const props = defineProps<{
 	taskId: string
@@ -196,6 +197,9 @@ task.onSuccess((doc) => {
 	if (['Task', 'SpaceTask'].includes(route.name as string) && route.params.taskId === doc.name) {
 		task.trackVisit.submit()
 	}
+	updateProjectTask.submit(doc).then(() => {
+		// no action needed after update
+	})
 })
 
 const assignableUsers = computed<{ label: string; value: string }[]>(() => {

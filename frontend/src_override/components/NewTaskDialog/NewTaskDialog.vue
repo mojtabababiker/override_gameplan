@@ -60,9 +60,10 @@
 </template>
 <script setup lang="ts">
 import { computed, h, useTemplateRef, watch } from 'vue'
-import { Dialog, FormControl, Dropdown, Combobox, DatePicker } from 'frappe-ui'
+import { Dialog, FormControl, Dropdown, Combobox, DatePicker, useCall } from 'frappe-ui'
 import TaskStatusIcon from './TaskStatusIcon.vue'
 import { activeUsers } from '@/data/users'
+import {createProjectTask} from '@/data/tasks'
 import { GPTask } from '@/types/doctypes'
 import { showDialog, newTask, _onSuccess } from './state'
 import { useGroupedSpaceOptions } from '@/data/groupedSpaces'
@@ -106,6 +107,13 @@ function onCreateClick(e: KeyboardEvent) {
   }
 
   return newTask.value.submit().then((doc) => {
+    console.log("\n\nCreating ERPNext Project Task from GP Task\n\n");
+    return createProjectTask.submit({...doc}).catch(() => {
+      // ignore errors
+      console.error("Error creating ERPNext Project Task from GP Task");
+      return doc
+    }).then((doc) => doc)
+  }).then((doc) => {
     showDialog.value = false
     _onSuccess.value(doc)
   })

@@ -154,6 +154,11 @@ doc_events = {
         "on_update": "override_gameplan.override_gameplan.sync_hooks.project.on_project_update",
         "on_trash": "override_gameplan.override_gameplan.sync_hooks.project.on_project_trash",
     },
+    "Task": {
+        "after_insert": "override_gameplan.override_gameplan.sync_hooks.task.create_gp_task_from_project_task",
+        "on_update": "override_gameplan.override_gameplan.sync_hooks.task.update_gp_task_from_project_task",
+        "on_trash": "override_gameplan.override_gameplan.sync_hooks.task.delete_gp_task",
+    },
 }
 
 # Scheduled Tasks
