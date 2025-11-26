@@ -46,7 +46,7 @@ required_apps = [
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+# doctype_js = {"Task": "public/js/erpnext/task.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -258,6 +258,9 @@ doc_events = {
 # auth_hooks = [
 # 	"override_gameplan.auth.validate"
 # ]
+
+on_login = "override_gameplan.utils.auth.on_login"
+on_logout = "override_gameplan.utils.auth.on_logout"
 
 # Automatically update python controller files with type annotations for this app.
 export_python_type_annotations = True
