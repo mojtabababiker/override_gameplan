@@ -131,6 +131,17 @@ after_uninstall = "override_gameplan.uninstall.after_uninstall"
 # 	"Event": "frappe.desk.doctype.event.event.has_permission",
 # }
 
+fixtures = [
+    {
+        "dt": "GP Team",
+        "filters": [["name", "in", ["Company"]]],
+    },
+    {
+        "dt": "GP Project",
+        "filters": [["title", "in", ["Achievements", "News"]]],
+    },
+]
+
 # Document Events
 # ---------------
 # Hook on document methods and events

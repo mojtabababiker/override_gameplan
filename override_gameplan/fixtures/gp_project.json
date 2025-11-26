@@ -1,0 +1,38 @@
+[
+  {
+    "admin": null,
+    "archived_at": null,
+    "archived_by": null,
+    "description": null,
+    "discussions_count": 0,
+    "docstatus": 0,
+    "doctype": "GP Project",
+    "icon": "📢",
+    "is_followed": 0,
+    "is_private": 0,
+    "members": [],
+    "modified": "2025-11-24 23:15:27.196398",
+    "readme": null,
+    "tasks_count": 0,
+    "team": "Company",
+    "title": "News"
+  },
+  {
+    "admin": null,
+    "archived_at": null,
+    "archived_by": null,
+    "description": "<div class=\"ql-editor read-mode\"><p>Company and teammates recent accomplishments and scores</p></div>",
+    "discussions_count": 0,
+    "docstatus": 0,
+    "doctype": "GP Project",
+    "icon": "🎫",
+    "is_followed": 0,
+    "is_private": 0,
+    "members": [],
+    "modified": "2025-11-24 23:14:59.553066",
+    "readme": null,
+    "tasks_count": 0,
+    "team": "Company",
+    "title": "Achievements"
+  }
+]

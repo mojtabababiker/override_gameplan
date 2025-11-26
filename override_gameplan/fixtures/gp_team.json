@@ -1,0 +1,17 @@
+[
+  {
+    "archived_at": null,
+    "archived_by": null,
+    "cover_image": "",
+    "cover_image_position": 0.0,
+    "docstatus": 0,
+    "doctype": "GP Team",
+    "icon": null,
+    "is_private": 0,
+    "members": [],
+    "modified": "2025-11-24 21:59:46.038253",
+    "name": "Company",
+    "readme": null,
+    "title": "Company"
+  }
+]
