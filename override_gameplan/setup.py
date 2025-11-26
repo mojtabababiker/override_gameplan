@@ -12,15 +12,17 @@ def setup_custom_fields():
             create_custom_field(doctype, field)
 
 
-def delete_custom_fields():
+def delete_custom_fields(fields_to_delete=None):
     """Delete custom fields for specified doctypes."""
     print("\n\nDeleting custom fields...", end="\n\n")
-    for doctype, fields in custom_fields.items():
+    custom_fields_to_delete = fields_to_delete or custom_fields
+    for doctype, fields in custom_fields_to_delete.items():
         for field in fields:
             fieldname = field.get("fieldname")
-            if fieldname and frappe.db.exists(
-                "Custom Field", {"dt": doctype, "fieldname": fieldname}
-            ):
-                frappe.delete_doc(
-                    "Custom Field", {"dt": doctype, "fieldname": fieldname}, force=True
-                )
+            frappe.db.delete(
+                "Custom Field",
+                {"dt": doctype, "fieldname": fieldname},
+            )
+            print(f"Deleted custom field '{fieldname}' from doctype '{doctype}'")
+        frappe.clear_cache(doctype)
+    print("\n\nCustom fields deletion completed.", end="\n\n")
