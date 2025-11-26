@@ -26,6 +26,24 @@ def create_user_profile(doc, method=None):
         doc.add_roles("Gameplan Member")
         doc.save()
         print("'Gameplan Member' role added and user saved.")
+
+    # join the user to the Company team and spaces
+    company_team = frappe.get_doc("GP Team", "Company")
+    try:
+        company_team.append("members", {"user": doc.name})
+        company_team.save(ignore_permissions=True)
+        # print(f"User {doc.name} added to Company team.")
+    except Exception as e:
+        print(f"Error adding user {doc.name} to Company team: {e}")
+    for project_title in ["Achievements", "News"]:
+        project = frappe.get_doc("GP Project", {"title": project_title})
+        try:
+            project.append("members", {"user": doc.name})
+            project.save(ignore_permissions=True)
+            # print(f"User {doc.name} added to {project_title} space.")
+        except Exception as e:
+            print(f"Error adding user {doc.name} to {project_title} space: {e}")
+
     gameplan.refetch_resource("Users")
 
 
