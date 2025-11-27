@@ -270,8 +270,8 @@ doc_events = {
 # 	"override_gameplan.auth.validate"
 # ]
 
-on_login = "override_gameplan.utils.auth.on_login"
-on_logout = "override_gameplan.utils.auth.on_logout"
+# on_login = "override_gameplan.utils.auth.on_login"
+# on_logout = "override_gameplan.utils.auth.on_logout"
 
 # Automatically update python controller files with type annotations for this app.
 export_python_type_annotations = True
