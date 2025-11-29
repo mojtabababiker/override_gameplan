@@ -6,3 +6,4 @@
 # Patches added in this section will be executed after doctypes are migrated
 override_gameplan.patches.add_last_updated_by_field_erpnext_tasks
 override_gameplan.patches.remove_last_updated_by_field_from_erpnext_task
+override_gameplan.patches.adding_in_time_checkin_fields_employee

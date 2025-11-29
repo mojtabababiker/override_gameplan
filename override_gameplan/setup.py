@@ -4,10 +4,11 @@ from frappe.custom.doctype.custom_field.custom_field import create_custom_field
 from .override_gameplan.custom_fields import custom_fields
 
 
-def setup_custom_fields():
+def setup_custom_fields(fields_to_setup=None):
     """Create custom fields for specified doctypes."""
-    print("\n\nSetting up custom fields...", end="\n\n")
-    for doctype, fields in custom_fields.items():
+    # print("\n\nSetting up custom fields...", end="\n\n")
+    custom_fields_to_setup = fields_to_setup or custom_fields
+    for doctype, fields in custom_fields_to_setup.items():
         for field in fields:
             create_custom_field(doctype, field)
 
