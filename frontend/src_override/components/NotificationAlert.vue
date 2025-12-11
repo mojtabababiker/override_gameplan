@@ -75,12 +75,12 @@ interface EmployeeCheckInEvent {
  */
 interface LeagueConfig {
   league: string
-  theme: 'gray' | 'blue' | 'green' | 'orange' | 'red'
+  theme: 'gray' | 'blue' | 'green' | 'orange' | 'yellow' | 'red'
   minDays: number
 }
 
 const LEAGUE_CONFIG: Record<number, LeagueConfig> = {
-  0: { league: 'Bronze', theme: 'orange', minDays: 0 },
+  0: { league: 'Bronze', theme: 'yellow', minDays: 0 },
   15: { league: 'Silver', theme: 'gray', minDays: 15 },
   45: { league: 'Gold', theme: 'orange', minDays: 45 },
   75: { league: 'Platinum', theme: 'blue', minDays: 75 },
@@ -118,7 +118,7 @@ const checkInAlert = ref({
   progress: 0,
   checkins: 0,
   league: '',
-  leagueTheme: 'gray' as "gray" | "blue" | "green" | "yellow" | "red",
+  leagueTheme: 'gray' as "gray" | "blue" | "green" | "yellow" | "orange" | "red",
 
   currentTimer: null as ReturnType<typeof setTimeout> | null,
 })
@@ -198,7 +198,7 @@ const isValidCheckInEvent = (data: any): data is EmployeeCheckInEvent => {
 }
 
 /**
- * Handle employee check-in WebSocket event with validation
+ * Handle employee check-in with validation
  * 
  * DATA STRUCTURE (from backend):
  * {
