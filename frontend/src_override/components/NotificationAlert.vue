@@ -59,6 +59,7 @@ interface NotificationConfig {
   type?: 'success' | 'error' | 'warning' | 'info'
   actionText?: string
   onAction?: () => void
+  currentTimer?: ReturnType<typeof setTimeout> | null
 }
 
 /**
@@ -142,17 +143,7 @@ const normalNotification = ref<NotificationConfig & { show: boolean; onAction?: 
   type: 'info',
   actionText: '',
   onAction: undefined,
-})
-
-// ─────────────────────────────────────────────────────────────────────────
-// COMPUTED PROPERTIES
-// ─────────────────────────────────────────────────────────────────────────
-/**
- * Derived state: Check if unread notifications exist
- * Watches the global unreadNotifications resource for changes
- */
-const hasUnreadNotifications = computed(() => {
-  return (unreadNotifications.data || 0) > 0
+  currentTimer: null as ReturnType<typeof setTimeout> | null,
 })
 
 // ─────────────────────────────────────────────────────────────────────────
@@ -287,6 +278,9 @@ const closeCheckInAlert = () => {
  * })
  */
 const showNormalNotification = (config: NotificationConfig) => {
+  if (normalNotification.value.currentTimer) {
+    clearTimeout(normalNotification.value.currentTimer)
+  }
   normalNotification.value = {
     show: true,
     title: config.title || 'Notification',
@@ -295,6 +289,9 @@ const showNormalNotification = (config: NotificationConfig) => {
     actionText: config.actionText || '',
     onAction: config.onAction,
   }
+  normalNotification.value.currentTimer = setTimeout(() => {
+    closeNormalAlert()
+  }, 5000) // Auto-hide after 5 seconds
 }
 
 /**
@@ -334,10 +331,11 @@ const handleNotificationAction = () => {
  * Shows alert when new unread notifications arrive
  */
 watch(
-  hasUnreadNotifications,
-  (hasNew) => {
-    if (hasNew && !normalNotification.value.show) {
-      const count = unreadNotifications.data || 0
+  unreadNotifications.data,
+  (notificationCount) => {
+
+    if (notificationCount > 0 && !normalNotification.value.show) {
+      const count = notificationCount as number
       showNormalNotification({
         title: 'New Notifications',
         description: count > 0 ? `You have ${count} unread notification${count !== 1 ? 's' : ''}` : 'New notification arrived',
@@ -356,10 +354,10 @@ watch(
  * Setup WebSocket listeners when component mounts
  */
 onMounted(() => {
-  // Listen for employee check-in events from backend
-  userCheckins.execute().then((d) => {
+  // retrieve employee check-in events from backend
+  userCheckins.execute().then((d:EmployeeCheckInEvent) => {
     handleCheckInEvent(d)
-  }).catch((err) => {
+  }).catch((err:any) => {
     console.error('[NotificationAlert] Error fetching user check-in data:', err)
   })
 })
@@ -372,6 +370,9 @@ onUnmounted(() => {
   // Clear any pending timers
   if (checkInAlert.value.currentTimer) {
     clearTimeout(checkInAlert.value.currentTimer)
+  }
+  if (normalNotification.value.currentTimer) {
+    clearTimeout(normalNotification.value.currentTimer)
   }
 
   // Close any open notifications
